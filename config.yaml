@@ -1,0 +1,45 @@
+# ============================================================
+# 导航面板配置示例
+# 用法：复制为 config.local.yaml 并按实际环境修改，然后
+#       CONFIG_PATH=config.local.yaml ./dashboard
+# 修改配置文件后自动热重载，无需重启服务。
+# 结构：面板 → 分组（group）→ 站点（site）→ 地址（address）
+# ============================================================
+
+title: 我的导航面板     # 必填：面板标题
+desc: 一台 NAS，两套链路——内网直连低延迟，外网经反向代理加密回源，数据始终留在自己的硬盘上。 # 可选：首屏描述
+theme: dark            # 可选：dark 机架工业风 / orbital 星轨调度台（默认 dark；运行时按 T 切换）
+networkMode: intranet  # 可选：默认网络模式 intranet / internet（默认 intranet）
+
+groups:
+  - code: DEV          # 可选：分组代号（展示用）
+    name: 研发工具      # 必填：分组名
+    sites:
+      - name: Gitea    # 必填：站点名
+        desc: Git 代码托管 · CI/CD                                  # 可选：站点描述
+        # icon 可选，三种写法（不写、或图标名无效时，回退显示站点首字母）：
+        #   1) Lucide 图标名：小写中划线格式，全部名字可在 lucide.dev/icons 查询
+        #      如 git-branch / terminal / tv / lock / activity ...
+        #   2) 在线图片链接：icon: https://cdn.simpleicons.org/gitea
+        #   3) 相对路径图片：icon: /icons/gitea.svg（文件放在配置文件同级的 icons 目录）
+        icon: git-branch
+        addresses:                                                  # 必填：至少一个地址；net 取值 intranet / internet
+          - { net: intranet, label: 内网, url: "http://192.168.1.100:3000" }
+          - { net: internet, label: 外网, url: "https://git.example.com" }
+      - name: 终端
+        icon: terminal
+        addresses:                                                  # 只有内网地址也可以
+          - { net: intranet, label: 内网, url: "http://192.168.1.100:3001" }
+
+  - code: MEDIA
+    name: 影音媒体
+    sites:
+      - name: Jellyfin
+        desc: 影视点播 · 直播
+        icon: tv
+        addresses:
+          - { net: intranet, label: 内网, url: "http://192.168.1.100:8096" }
+      - name: 音乐
+        icon: music
+        addresses:
+          - { net: intranet, label: 内网, url: "http://192.168.1.100:3002" }

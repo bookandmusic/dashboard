@@ -1,0 +1,18 @@
+import { createApp } from 'vue'
+import '@fontsource/big-shoulders-display/500'
+import '@fontsource/big-shoulders-display/700'
+import '@fontsource/big-shoulders-display/800'
+import '@fontsource/big-shoulders-display/900'
+import '@fontsource/ibm-plex-mono/400'
+import '@fontsource/ibm-plex-mono/500'
+import '@fontsource/ibm-plex-mono/600'
+import '@fontsource/unbounded/500.css'
+import '@fontsource/unbounded/700.css'
+import '@fontsource/unbounded/900.css'
+import '@fontsource/space-mono/400.css'
+import '@fontsource/space-mono/700.css'
+import './style.css'
+import './orbital.css'
+import App from './App.vue'
+
+createApp(App).mount('#app')

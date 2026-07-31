@@ -1,0 +1,25 @@
+# 构建产物
+/dashboard
+/backend/frontend/
+/frontend/dist/
+/frontend/node_modules/
+
+# 用户私有配置与本地资产（仓库内 config.yaml 仅为示例）
+config.local.yaml
+/demo/
+/icons/
+
+# 临时文件
+*.log
+.DS_Store
+
+# 环境与编辑器
+.env
+.env.*
+.idea/
+.vscode/
+*.swp
+
+# 测试与调试
+coverage/
+npm-debug.log*

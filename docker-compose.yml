@@ -1,0 +1,24 @@
+services:
+  dashboard:
+    build: .
+    container_name: nav-dashboard
+    ports:
+      - "8080:8080"
+    volumes:
+      # 配置文件必须挂载：运行时读取 + fsnotify 热重载，不能打进镜像
+      - ./config.yaml:/app/config.yaml:ro
+      # 可选：相对路径图标固定读取配置文件同级的 icons/（用到再挂载）
+      # - ./icons:/app/icons:ro
+      # 系统指标采集：只读挂载宿主机 /proc、/sys
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      # 磁盘占用采集：把宿主机数据卷挂到 /host 下（按实际卷调整），
+      # 后端读 /host/proc/mounts 枚举挂载点，再对 /host/<挂载点> 做 statfs
+      - /volume1:/host/volume1:ro
+      - /volume2:/host/volume2:ro
+    environment:
+      - HOST_PROC=/host/proc
+      - HOST_SYS=/host/sys
+      - HOST_ROOT=/host
+      - CONFIG_PATH=/app/config.yaml
+    restart: unless-stopped
